@@ -1,3 +1,8 @@
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class HuffTree {
     private Node root = null;
     private int number = 256;
@@ -71,13 +76,15 @@ public class HuffTree {
         }
     }
 
-    private Node searchHuff(int symbol) {
+    private Node searchHuff(int symbol, ArrayList<Character> path) {
         Node current = root;
         int whereTo = 0;
 
         while (true) {
 
             if (current.getType() == 0) {
+                if(path.size() != 0)
+                    path.remove(0);
                 return current;
             }
 
@@ -95,13 +102,17 @@ public class HuffTree {
             if (whereTo == 1) {
                 current = current.getChildOne();
                 whereTo = 0;
-            } else
+                path.add('0');
+            } else {
                 current = current.getChildTwo();
+                path.add('1');
+            }
         }
     }
 
-    public void addSymbol(int symbol){
-        Node node = searchHuff(symbol);
+    public char[] addSymbol(int symbol){
+        ArrayList<Character> path = new ArrayList<>();
+        Node node = searchHuff(symbol, path);
 
         if(node.getType() == 0){
             node.setType(2);
@@ -111,9 +122,33 @@ public class HuffTree {
             node.getChildTwo().setSymbol(symbol);
             System.out.println(symbol);
             System.out.println(node.getChildTwo().getSymbol());
+
+            char[] code = new char[8+path.size()];
+            int idx = 0;
+            for(char bin: path) {
+                code[idx] = bin;
+                idx++;
+            }
+
+            for(char bin: Integer.toBinaryString(symbol).toCharArray()) {
+                code[idx] = bin;
+                idx++;
+            }
+            incAndSwap(node);
+
+            return code;
         } else {
             node = swapBlock(node);
+
+            char[] code = new char[path.size()];
+            int idx = 0;
+            for(char bin: path) {
+                code[idx] = bin;
+                idx++;
+            }
+            incAndSwap(node);
+
+            return code;
         }
-        incAndSwap(node);
     }
 }

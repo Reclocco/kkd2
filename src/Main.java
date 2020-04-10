@@ -4,6 +4,7 @@ public class Main {
         HuffTree huffTree = new HuffTree();
         huffTree.print();
 
+        System.out.println("code: " + String.valueOf(huffTree.addSymbol(4)));
         huffTree.addSymbol(4);
         huffTree.print();
 
@@ -18,5 +19,6 @@ public class Main {
 
         huffTree.addSymbol(1);
         huffTree.print();
+
     }
 }
