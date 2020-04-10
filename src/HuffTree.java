@@ -129,7 +129,7 @@ public class HuffTree {
                 code[idx] = bin;
                 idx++;
             }
-
+            //Zła konwersja
             for(char bin: Integer.toBinaryString(symbol).toCharArray()) {
                 code[idx] = bin;
                 idx++;
