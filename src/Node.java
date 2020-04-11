@@ -4,7 +4,7 @@ public class Node {
 
     private int weight = 0;
     private int number = 0;
-    private int symbol = 0;
+    private char symbol;
     private int type = 0;
     /*
         0-NYT
@@ -84,11 +84,11 @@ public class Node {
         return children[1];
     }
 
-    public int getSymbol(){
+    public char getSymbol(){
         return symbol;
     }
 
-    public void setSymbol(int symbol){
+    public void setSymbol(char symbol){
         this.symbol = symbol;
     }
 

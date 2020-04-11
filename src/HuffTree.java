@@ -1,7 +1,4 @@
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class HuffTree {
     private Node root = null;
@@ -9,7 +6,7 @@ public class HuffTree {
 
     private Node swapBlock(Node bottom){
         Node leader = searchBlock(bottom.getWeight());
-        int tmp = bottom.getSymbol();
+        char tmp = bottom.getSymbol();
         bottom.setSymbol(leader.getSymbol());
         leader.setSymbol(tmp);
 
@@ -76,26 +73,30 @@ public class HuffTree {
         }
     }
 
-    private Node searchHuff(int symbol, ArrayList<Character> path) {
+    private Node searchHuff(char symbol, ArrayList<Character> path) {
         Node current = root;
         int whereTo = 0;
 
         while (true) {
 
             if (current.getType() == 0) {
-                if(path.size() != 0)
+                if(path.size() != 0 && path.get(0) == '0')
                     path.remove(0);
                 return current;
             }
 
             if (current.getChildTwo().getType() == 1) {
-                if (current.getChildTwo().getSymbol() == symbol)
+                if (current.getChildTwo().getSymbol() == symbol) {
+                    path.add('1');
                     return current.getChildTwo();
+                }
 
                 whereTo = 1;
             } else {
-                if (current.getChildOne().getSymbol() == symbol)
+                if (current.getChildOne().getSymbol() == symbol) {
+                    path.add('0');
                     return current.getChildOne();
+                }
 
             }
 
@@ -110,7 +111,7 @@ public class HuffTree {
         }
     }
 
-    public char[] addSymbol(int symbol){
+    public String addSymbol(char symbol){
         ArrayList<Character> path = new ArrayList<>();
         Node node = searchHuff(symbol, path);
 
@@ -120,8 +121,6 @@ public class HuffTree {
             node.setChildTwo(new Node(1, number, node, 1));
             number -= 2;
             node.getChildTwo().setSymbol(symbol);
-            System.out.println(symbol);
-            System.out.println(node.getChildTwo().getSymbol());
 
             char[] code = new char[8+path.size()];
             int idx = 0;
@@ -129,15 +128,20 @@ public class HuffTree {
                 code[idx] = bin;
                 idx++;
             }
-            //Zła konwersja
-            for(char bin: Integer.toBinaryString(symbol).toCharArray()) {
+            char[] binSym = Integer.toBinaryString(symbol).toCharArray();
+            for(int i=0; i<8-binSym.length; i++) {
+                code[idx] = '0';
+                idx++;
+            }
+            for(char bin: binSym) {
                 code[idx] = bin;
                 idx++;
             }
             incAndSwap(node);
 
-            return code;
-        } else {
+            return String.valueOf(code);
+        }
+        else {
             node = swapBlock(node);
 
             char[] code = new char[path.size()];
@@ -146,9 +150,7 @@ public class HuffTree {
                 code[idx] = bin;
                 idx++;
             }
-            incAndSwap(node);
-
-            return code;
+            return String.valueOf(code);
         }
     }
 }
