@@ -155,28 +155,24 @@ public class HuffTree {
         }
     }
 
-    public char walk(char choice, int type){
+    public String walk(char choice){
         if(current.getType() == 0){
             current = root;
-            type = 0;
-            return 'a';
+            return "";
         }
         else if(current.getType() == 1) {
             char symbol = current.getSymbol();
             current = root;
-            type = 1;
-            return symbol;
+            return "" + symbol;
         }
 
         if(choice == '0') {
             current = current.getChildOne();
-            type = 2;
-            return 'a';
+            return "aa";
         }
         else {
             current = current.getChildTwo();
-            type = 2;
-            return 'a';
+            return "aa";
         }
     }
 }

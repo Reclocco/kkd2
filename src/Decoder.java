@@ -23,13 +23,21 @@ public class Decoder {
 
         String code = codeBuilder.toString();
         int idx = 0;
-        int type = 0;
-        char symbol;
+        String symbol;
 
         while(idx < code.length()){
-            symbol = huffTree.walk(code.charAt(idx), type);
-            if(type == 0){
+            symbol = huffTree.walk(code.charAt(idx));
+            if(symbol.length()==0){
                 String sub = code.substring(idx, idx+8);
+                writer.write((char) Integer.parseInt(sub, 2));
+                idx += 8;
+            }
+            else if(symbol.length()==1){
+                writer.write(symbol.charAt(0));
+                idx++;
+            }
+            else {
+                idx++;
             }
         }
 
