@@ -32,6 +32,7 @@ public class HuffTree {
 
     public HuffTree() {
         root = new Node(0, number, null, 0);
+        current = root;
         number--;
     }
 
@@ -156,6 +157,11 @@ public class HuffTree {
     }
 
     public String walk(char choice){
+        if(choice == '0')
+            current = current.getChildOne();
+        else
+            current = current.getChildTwo();
+
         if(current.getType() == 0){
             current = root;
             return "";
@@ -163,16 +169,9 @@ public class HuffTree {
         else if(current.getType() == 1) {
             char symbol = current.getSymbol();
             current = root;
+            addSymbol(symbol);
             return "" + symbol;
-        }
-
-        if(choice == '0') {
-            current = current.getChildOne();
+        } else
             return "aa";
-        }
-        else {
-            current = current.getChildTwo();
-            return "aa";
-        }
     }
 }
