@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class HuffTree {
     private Node root = null;
+    private Node current = root;
     private int number = 256;
 
     private Node swapBlock(Node bottom){
@@ -151,6 +152,31 @@ public class HuffTree {
                 idx++;
             }
             return String.valueOf(code);
+        }
+    }
+
+    public char walk(char choice, int type){
+        if(current.getType() == 0){
+            current = root;
+            type = 0;
+            return 'a';
+        }
+        else if(current.getType() == 1) {
+            char symbol = current.getSymbol();
+            current = root;
+            type = 1;
+            return symbol;
+        }
+
+        if(choice == '0') {
+            current = current.getChildOne();
+            type = 2;
+            return 'a';
+        }
+        else {
+            current = current.getChildTwo();
+            type = 2;
+            return 'a';
         }
     }
 }
