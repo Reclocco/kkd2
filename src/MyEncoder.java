@@ -22,20 +22,18 @@ public class MyEncoder {
         reader.close();
 
         int digling = codeBuilder.length()%8;
+        System.out.println(codeBuilder.length());
 
-        for(int i=0; i<(8-(codeBuilder.length()%8))%8; i++){
+        for(int i=0; i<(8-digling)%8; i++){
             codeBuilder.append("0");
         }
 
         String code = codeBuilder.toString();
-        System.out.println(code.length());
 
         writer.write((char) digling);
 
-        int counter = 1;
         for(int i=0; i<code.length()/8; i++){
             writer.write((char) Integer.parseInt(code.substring(i*8, i*8+8), 2));
-            counter++;
         }
 
         writer.close();
