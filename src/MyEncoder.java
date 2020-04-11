@@ -1,22 +1,42 @@
 import java.io.*;
+import java.io.File;
 
 public class MyEncoder {
-    public void encode() throws IOException {
-        HuffTree huffTree = new HuffTree();
+    String raw;
+    String encoded;
+    HuffTree huffTree;
 
+    public MyEncoder() throws IOException {
+        huffTree = new HuffTree();
+
+        raw = "C:\\Users\\micha\\Desktop\\kkd2\\src\\raw.txt";
+        encoded = "C:\\Users\\micha\\Desktop\\kkd2\\src\\encoded.txt";
+    }
+
+    private void printStats(){
+        File file1 = new File(raw);
+        File file2 = new File(encoded);
+
+        System.out.println("Entropia: " + huffTree.getEntropy());
+        System.out.println("Kompresja: " + file2.length()/file1.length());
+        System.out.println("Srednia długość słowa kodowego: " + huffTree.getAverage());
+    }
+
+    public void encode() throws IOException {
         StringBuilder codeBuilder = new StringBuilder();
 
-        String raw = "C:\\Users\\micha\\Desktop\\kkd2\\src\\raw.txt";
         BufferedReader reader = new BufferedReader(new FileReader(raw));
         String line = reader.readLine();
+        System.out.println(line);
 
-        String encoded = "C:\\Users\\micha\\Desktop\\kkd2\\src\\encoded.txt";
         BufferedWriter writer = new BufferedWriter(new FileWriter(encoded));
 
         while(line != null) {
             for (char e : line.toCharArray()) {
+                System.out.println(e);
                 codeBuilder.append(huffTree.addSymbol(e));
             }
+            codeBuilder.append(huffTree.addSymbol((char) 10));
             line = reader.readLine();
         }
         reader.close();
@@ -37,5 +57,6 @@ public class MyEncoder {
         }
 
         writer.close();
+        printStats();
     }
 }

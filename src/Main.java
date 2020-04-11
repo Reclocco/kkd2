@@ -7,5 +7,10 @@ public class Main {
 
         myEncoder.encode();
         myDecoder.decode();
+
+        System.out.println((int) 'ÿ');
+        System.out.println(Integer.toBinaryString('ÿ').toCharArray());
+        System.out.println((char) 10);
+        System.out.println((char) 255);
     }
 }
