@@ -18,7 +18,7 @@ public class MyEncoder {
         File file2 = new File(encoded);
 
         System.out.println("Entropia: " + huffTree.getEntropy());
-        System.out.println("Kompresja: " + file2.length()/file1.length());
+        System.out.println("Kompresja: " + 1.0*file2.length()/file1.length());
         System.out.println("Srednia długość słowa kodowego: " + huffTree.getAverage());
     }
 
@@ -27,13 +27,11 @@ public class MyEncoder {
 
         BufferedReader reader = new BufferedReader(new FileReader(raw));
         String line = reader.readLine();
-        System.out.println(line);
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(encoded));
 
         while(line != null) {
             for (char e : line.toCharArray()) {
-                System.out.println(e);
                 codeBuilder.append(huffTree.addSymbol(e));
             }
             codeBuilder.append(huffTree.addSymbol((char) 10));
@@ -42,7 +40,6 @@ public class MyEncoder {
         reader.close();
 
         int digling = codeBuilder.length()%8;
-        System.out.println(codeBuilder.length());
 
         for(int i=0; i<(8-digling)%8; i++){
             codeBuilder.append("0");
@@ -58,5 +55,6 @@ public class MyEncoder {
 
         writer.close();
         printStats();
+        huffTree.print();
     }
 }

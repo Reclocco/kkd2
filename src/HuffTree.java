@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HuffTree {
     private Node root = null;
     private Node current;
     private int number = 256;
-    private ArrayList<Node> leafs;
+    private ArrayList<Node> leafs = new ArrayList<>();
 
     private Node swapBlock(Node bottom){
         Node leader = searchBlock(bottom.getWeight());
@@ -122,7 +123,7 @@ public class HuffTree {
             node.setChildTwo(new Node(1, number, node, 1));
             number -= 2;
             node.getChildTwo().setSymbol(symbol);
-            leafs.add(node);
+            leafs.add(node.getChildTwo());
 
             char[] code = new char[8+path.size()];
             int idx = 0;
@@ -145,6 +146,8 @@ public class HuffTree {
         }
         else {
             node = swapBlock(node);
+            node.incWeight();
+            incAndSwap(node);
 
             char[] code = new char[path.size()];
             int idx = 0;
@@ -189,7 +192,18 @@ public class HuffTree {
         return entropy;
     }
 
-    public int getAverage(){
-        return (1+leafs.size()*2)/2;
+    public double getAverage(){
+        Collections.sort(leafs);
+        int len = 1;
+        int sum = 0;
+        int omega = 0;
+
+        for(Node leaf: leafs){
+            sum += len * leaf.getWeight();
+            omega += leaf.getWeight();
+            len++;
+        }
+
+        return 1.0*sum/omega;
     }
 }

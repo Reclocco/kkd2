@@ -8,9 +8,19 @@ public class Main {
         myEncoder.encode();
         myDecoder.decode();
 
-        System.out.println((int) 'ÿ');
-        System.out.println(Integer.toBinaryString('ÿ').toCharArray());
-        System.out.println((char) 10);
-        System.out.println((char) 255);
+//        HuffTree huffTree = new HuffTree();
+//        huffTree.addSymbol('4');
+//        huffTree.addSymbol('a');
+//        huffTree.addSymbol('a');
+//        huffTree.addSymbol('c');
+//        huffTree.addSymbol('c');
+//        huffTree.addSymbol('8');
+//        huffTree.addSymbol('k');
+//        huffTree.addSymbol('c');
+//        huffTree.addSymbol('b');
+//        huffTree.addSymbol('b');
+//        huffTree.addSymbol('4');
+//
+//        huffTree.print();
     }
 }

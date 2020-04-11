@@ -50,24 +50,20 @@ public class MyDecoder {
         String symbol;
         symbol = huffTree.walk(code.charAt(idx));
         if(symbol.length()==0){
-            System.out.println("Nowy symbol");
             idx++;
             String sub = code.substring(idx, idx+8);
-            System.out.println((char) Integer.parseInt(sub, 2));
+
             huffTree.addSymbol((char) Integer.parseInt(sub, 2));
             writer.write((char) Integer.parseInt(sub, 2));
             idx += 8;
         }
         else if(symbol.length()==1){
-            System.out.println("znaloziono w drzewie");
             writer.write(symbol.charAt(0));
             idx++;
         }
         else {
-            System.out.println("wierzchołek wewn.");
             idx++;
         }
-        System.out.println(idx);
         return idx;
     }
 }
