@@ -30,11 +30,16 @@ public class MyEncoder {
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(encoded));
 
+        boolean first = false;
         while(line != null) {
+            if(first) {
+                codeBuilder.append(huffTree.addSymbol((char) 10));
+            }
+            first = true;
+
             for (char e : line.toCharArray()) {
                 codeBuilder.append(huffTree.addSymbol(e));
             }
-            codeBuilder.append(huffTree.addSymbol((char) 10));
             line = reader.readLine();
         }
         reader.close();
@@ -46,6 +51,7 @@ public class MyEncoder {
         }
 
         String code = codeBuilder.toString();
+        System.out.println("code: " + code + ", " + code.length());
 
         writer.write((char) digling);
 
@@ -55,6 +61,6 @@ public class MyEncoder {
 
         writer.close();
         printStats();
-        huffTree.print();
+//        huffTree.print();
     }
 }
