@@ -9,8 +9,8 @@ public class MyEncoder {
     public MyEncoder() throws IOException {
         huffTree = new HuffTree();
 
-        raw = "C:\\Users\\micha\\Desktop\\kkd2\\src\\raw.txt";
-        encoded = "C:\\Users\\micha\\Desktop\\kkd2\\src\\encoded.txt";
+        raw = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\raw.txt";
+        encoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\encoded.txt";
     }
 
     private void printStats(){
@@ -44,9 +44,9 @@ public class MyEncoder {
         }
         reader.close();
 
-        int digling = codeBuilder.length()%8;
+        int digling = codeBuilder.length()%16;
 
-        for(int i=0; i<(8-digling)%8; i++){
+        for(int i=0; i<(16-digling)%16; i++){
             codeBuilder.append("0");
         }
 
@@ -54,8 +54,8 @@ public class MyEncoder {
 
         writer.write((char) digling);
 
-        for(int i=0; i<code.length()/8; i++){
-            writer.write((char) Integer.parseInt(code.substring(i*8, i*8+8), 2));
+        for(int i=0; i<code.length()/16; i++){
+            writer.write((char) Integer.parseInt(code.substring(i*16, i*16+16), 2));
         }
 
         writer.close();

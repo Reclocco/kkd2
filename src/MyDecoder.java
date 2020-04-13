@@ -6,19 +6,25 @@ public class MyDecoder {
 
         StringBuilder codeBuilder = new StringBuilder();
 
-        String encoded = "C:\\Users\\micha\\Desktop\\kkd2\\src\\encoded.txt";
+        String encoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\encoded.txt";
         BufferedReader reader = new BufferedReader(new FileReader(encoded));
         String line = reader.readLine();
 
-        String decoded = "C:\\Users\\micha\\Desktop\\kkd2\\src\\decoded.txt";
+        String decoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\decoded.txt";
         BufferedWriter writer = new BufferedWriter(new FileWriter(decoded));
 
-        int dingling = line.charAt(0);
+        int dingling;
+        try{
+            dingling = line.charAt(0);
+        } catch (NullPointerException e){
+            dingling = 10;
+        }
+
 
         while(line != null) {
             for (char e : line.toCharArray()) {
                 String appended = Integer.toBinaryString(e);
-                for(int i=0; i<8-appended.length(); i++){
+                for(int i=0; i<16-appended.length(); i++){
                     codeBuilder.append("0");
                 }
                 codeBuilder.append(appended);
@@ -28,14 +34,14 @@ public class MyDecoder {
         reader.close();
 
         String code = codeBuilder.toString();
-        int idx = 8;
+        int idx = 16;
 
-        String sub = code.substring(idx, idx+8);
+        String sub = code.substring(idx, idx+16);
         huffTree.addSymbol((char) Integer.parseInt(sub, 2));
         writer.write((char) Integer.parseInt(sub, 2));
         idx += 8;
 
-        while(idx < code.length()-8){
+        while(idx < code.length()-16){
             idx = walk(huffTree, writer, code, idx);
         }
 

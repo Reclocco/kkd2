@@ -127,15 +127,15 @@ public class HuffTree {
             node.getChildTwo().setSymbol(symbol);
             leafs.add(node.getChildTwo());
 
-            char[] code = new char[8+path.size()];
+            char[] code = new char[16+path.size()];
             int idx = 0;
             for(char bin: path) {
                 code[idx] = bin;
                 idx++;
             }
             char[] binSym = Integer.toBinaryString(symbol).toCharArray();
-            System.out.println(binSym);
-            for(int i=0; i<8-binSym.length; i++) {
+//            System.out.println(binSym);
+            for(int i=0; i<16-binSym.length; i++) {
                 code[idx] = '0';
                 idx++;
             }
