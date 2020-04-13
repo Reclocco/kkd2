@@ -6,8 +6,8 @@ public class HuffTree {
     private Node current;
     private int number = 256;
     private ArrayList<Node> leafs = new ArrayList<>();
-    private int sumLen = 0;
-    private int sumOcc = 0;
+    public int sumLen = 0;
+    public int sumOcc = 0;
 
     private Node swapBlock(Node bottom){
         Node leader = searchBlock(bottom.getWeight());
@@ -134,6 +134,7 @@ public class HuffTree {
                 idx++;
             }
             char[] binSym = Integer.toBinaryString(symbol).toCharArray();
+            System.out.println(binSym);
             for(int i=0; i<8-binSym.length; i++) {
                 code[idx] = '0';
                 idx++;
@@ -144,7 +145,6 @@ public class HuffTree {
             }
             incAndSwap(node);
 
-//            System.out.println("Combined: " + Arrays.toString(code));
             sumLen += code.length;
             sumOcc++;
             return String.valueOf(code);
@@ -161,7 +161,6 @@ public class HuffTree {
                 idx++;
             }
 
-//            System.out.println("Huff code: " + Arrays.toString(code));
             sumLen += code.length;
             sumOcc++;
             return String.valueOf(code);

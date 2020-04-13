@@ -39,10 +39,12 @@ public class MyDecoder {
             idx = walk(huffTree, writer, code, idx);
         }
 
-        for(int i=0; i<dingling; i++){
-            idx = walk(huffTree, writer, code, idx);
+//        System.out.println(dingling);
+        if(idx<code.length()-1) {
+            for (int i = 0; i < dingling; i++) {
+                idx = walk(huffTree, writer, code, idx);
+            }
         }
-
         writer.close();
     }
 

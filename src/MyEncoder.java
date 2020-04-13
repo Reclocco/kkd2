@@ -51,7 +51,6 @@ public class MyEncoder {
         }
 
         String code = codeBuilder.toString();
-        System.out.println("code: " + code + ", " + code.length());
 
         writer.write((char) digling);
 
@@ -61,6 +60,5 @@ public class MyEncoder {
 
         writer.close();
         printStats();
-//        huffTree.print();
     }
 }
