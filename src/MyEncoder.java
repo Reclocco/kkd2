@@ -44,7 +44,7 @@ public class MyEncoder {
         }
         reader.close();
 
-        System.out.println("encoded: " + codeBuilder + ", " + codeBuilder.length());
+//        System.out.println("encoded: " + codeBuilder + ", " + codeBuilder.length());
 
         int digling = codeBuilder.length()%16;
 

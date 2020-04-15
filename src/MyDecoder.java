@@ -25,14 +25,9 @@ public class MyDecoder {
         boolean first = false;
 
         while(line != null) {
-//            if(first) {
-//                codeBuilder.append(huffTree.addSymbol((char) 10));
-//            }
-//            first = true;
-
             for (char e : line.toCharArray()) {
                 String appended = Integer.toBinaryString(e);
-                System.out.println("char: " + e + "bin: " + appended);
+//                System.out.println("char: " + e + "bin: " + appended);
                 for(int i=0; i<16-appended.length(); i++){
                     codeBuilder.append("0");
                 }
@@ -43,7 +38,7 @@ public class MyDecoder {
         reader.close();
 
         String code = codeBuilder.toString();
-        System.out.println("decoded: " + code);
+//        System.out.println("decoded: " + code);
         int idx = 0;
 
         String sub = code.substring(idx, idx+8);
@@ -55,7 +50,7 @@ public class MyDecoder {
             idx = walk(huffTree, writer, code, idx);
         }
 
-        System.out.println("dongle: " + dingling);
+//        System.out.println("dongle: " + dingling);
 //        if(idx<code.length()-1) {
 //            for (int i = 0; i < dingling; i++) {
 //                idx = walk(huffTree, writer, code, idx);

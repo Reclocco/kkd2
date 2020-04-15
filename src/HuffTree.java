@@ -147,7 +147,7 @@ public class HuffTree {
 
             sumLen += code.length;
             sumOcc++;
-            System.out.println("found new: " + Arrays.toString(code));
+//            System.out.println("found new: " + Arrays.toString(code));
             return String.valueOf(code);
         }
         else {
@@ -164,7 +164,7 @@ public class HuffTree {
 
             sumLen += code.length;
             sumOcc++;
-            System.out.println("found again: " + Arrays.toString(code));
+//            System.out.println("found again: " + Arrays.toString(code));
             return String.valueOf(code);
         }
     }
