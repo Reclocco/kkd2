@@ -16,7 +16,7 @@ public class MyDecoder {
         int dingling;
         try{
             dingling = line.charAt(0);
-        } catch (NullPointerException e){
+        } catch (StringIndexOutOfBoundsException e){
             dingling = 10;
         }
 
@@ -34,23 +34,23 @@ public class MyDecoder {
         reader.close();
 
         String code = codeBuilder.toString();
-        int idx = 16;
+        int idx = 0;
 
-        String sub = code.substring(idx, idx+16);
+        String sub = code.substring(idx, idx+8);
         huffTree.addSymbol((char) Integer.parseInt(sub, 2));
         writer.write((char) Integer.parseInt(sub, 2));
         idx += 8;
 
-        while(idx < code.length()-16){
+        while(idx < code.length()-16+dingling){
             idx = walk(huffTree, writer, code, idx);
         }
 
-//        System.out.println(dingling);
-        if(idx<code.length()-1) {
-            for (int i = 0; i < dingling; i++) {
-                idx = walk(huffTree, writer, code, idx);
-            }
-        }
+        System.out.println("dongle: " + dingling);
+//        if(idx<code.length()-1) {
+//            for (int i = 0; i < dingling; i++) {
+//                idx = walk(huffTree, writer, code, idx);
+//            }
+//        }
         writer.close();
     }
 

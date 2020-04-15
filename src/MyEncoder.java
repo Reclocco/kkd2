@@ -44,6 +44,8 @@ public class MyEncoder {
         }
         reader.close();
 
+        System.out.println(codeBuilder + ", " + codeBuilder.length());
+
         int digling = codeBuilder.length()%16;
 
         for(int i=0; i<(16-digling)%16; i++){
