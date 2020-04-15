@@ -16,14 +16,23 @@ public class MyDecoder {
         int dingling;
         try{
             dingling = line.charAt(0);
+            line = line.substring(1);
         } catch (StringIndexOutOfBoundsException e){
             dingling = 10;
+            line = reader.readLine();
         }
 
+        boolean first = false;
 
         while(line != null) {
+//            if(first) {
+//                codeBuilder.append(huffTree.addSymbol((char) 10));
+//            }
+//            first = true;
+
             for (char e : line.toCharArray()) {
                 String appended = Integer.toBinaryString(e);
+                System.out.println("char: " + e + "bin: " + appended);
                 for(int i=0; i<16-appended.length(); i++){
                     codeBuilder.append("0");
                 }
@@ -34,6 +43,7 @@ public class MyDecoder {
         reader.close();
 
         String code = codeBuilder.toString();
+        System.out.println("decoded: " + code);
         int idx = 0;
 
         String sub = code.substring(idx, idx+8);
