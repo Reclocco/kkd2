@@ -1,5 +1,7 @@
 import java.io.*;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class MyEncoder {
     String raw;
@@ -25,42 +27,62 @@ public class MyEncoder {
     public void encode() throws IOException {
         StringBuilder codeBuilder = new StringBuilder();
 
-        BufferedReader reader = new BufferedReader(new FileReader(raw));
-        String line = reader.readLine();
+//        BufferedReader reader = new BufferedReader(new FileReader(raw));
+//        String line = reader.readLine();
+//
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(encoded));
+//
+//        boolean first = false;
+//        while(line != null) {
+//            if(first) {
+//                codeBuilder.append(huffTree.addSymbol((char) 10));
+//            }
+//            first = true;
+//
+//            for (char e : line.toCharArray()) {
+//                codeBuilder.append(huffTree.addSymbol(e));
+//            }
+//            line = reader.readLine();
+//        }
+//        reader.close();
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(encoded));
+//        StringBuilder codebuilder = new StringBuilder();
 
-        boolean first = false;
-        while(line != null) {
-            if(first) {
-                codeBuilder.append(huffTree.addSymbol((char) 10));
-            }
-            first = true;
+        byte[] fileContent = Files.readAllBytes(Paths.get(raw));
 
-            for (char e : line.toCharArray()) {
-                codeBuilder.append(huffTree.addSymbol(e));
-            }
-            line = reader.readLine();
+        for(byte b: fileContent){
+            String s1 = String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+//            System.out.println("bin: " + s1);
+            codeBuilder.append(huffTree.addSymbol((char)Integer.parseInt(s1, 2)));
+//            os.write(Byte.parseByte(s1, 2));
+            System.out.println("char: " + (char)Integer.parseInt(s1, 2));
         }
-        reader.close();
 
-//        System.out.println("encoded: " + codeBuilder + ", " + codeBuilder.length());
+        System.out.println("encoded: " + codeBuilder + ", " + codeBuilder.length());
 
-        int digling = codeBuilder.length()%16;
+        int digling = codeBuilder.length()%8;
 
-        for(int i=0; i<(16-Integer.toBinaryString(digling).length())%16; i++){
+        for(int i=0; i<(8-Integer.toBinaryString(digling).length())%8; i++){
             codeBuilder.append("0");
         }
 
         String code = codeBuilder.toString();
+        OutputStream os = new FileOutputStream(encoded);
+        os.write(Byte.parseByte(Integer.toBinaryString(digling), 2));
 
-        writer.write((char) digling);
+//        writer.write((char) digling);
 
-        for(int i=0; i<code.length()/16; i++){
-            writer.write((char) Integer.parseInt(code.substring(i*16, i*16+16), 2));
+        for(int i=0; i<code.length()/8; i++){
+            int num = Integer.parseInt(code.substring(i*8, i*8+8), 2)-128;
+//            num = Integer.toBinaryString(Integer.parseInt(code.substring(i*8, i*8+8), 2)-128);
+//            writer.write((char) Integer.parseInt(code.substring(i*16, i*16+16), 2));
+            System.out.println("ENCODING bin: " + Integer.toBinaryString(num) + " dec: " + num);
+            byte b = (byte) num;
+            os.write(b);
         }
 
-        writer.close();
+//        writer.close();
+        os.close();
         printStats();
     }
 }

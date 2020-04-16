@@ -1,6 +1,6 @@
 import org.jetbrains.annotations.NotNull;
 
-public class Node implements Comparable<Node> {
+public class Node {
     private Node[] children = {null, null};
     private Node parent = null;
 
@@ -102,11 +102,11 @@ public class Node implements Comparable<Node> {
         this.type=type;
     }
 
-    @Override
-    public int compareTo(@NotNull Node o) {
-        if(this.getWeight() > (o.getWeight()))
-            return 1;
-        else
-            return 0;
-    }
+//    @Override
+//    public int compareTo(@NotNull Node o) {
+//        if(this.getWeight() > (o.getWeight()))
+//            return 1;
+//        else
+//            return 0;
+//    }
 }
