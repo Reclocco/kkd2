@@ -40,22 +40,6 @@ public class HuffTree {
         number--;
     }
 
-    public void print(){
-        Node current = root;
-        System.out.println("(Num: " + current.getNumber() + ", sym: " + current.getSymbol() + ", weight: " + current.getWeight() + ", type: " + current.getType() + ")");
-        while(current.getType() != 0){
-            System.out.print("(Num: " + current.getChildOne().getNumber() + ", sym: " + current.getChildOne().getSymbol() + ", weight: " + current.getChildOne().getWeight() + ", type: " + current.getChildOne().getType() + ")   ");
-            System.out.print("(Num: " + current.getChildTwo().getNumber() + ", sym: " + current.getChildTwo().getSymbol() + ", weight: " + current.getChildTwo().getWeight() + ", type: " + current.getChildTwo().getType() + ")\n");
-
-
-            if (current.getChildTwo().getType() == 1)
-                current = current.getChildOne();
-            else
-                current = current.getChildTwo();
-        }
-        System.out.println("\n");
-    }
-
     private Node searchBlock(int weight) {
         Node current = root;
         int whereTo = 0;
@@ -134,7 +118,6 @@ public class HuffTree {
                 idx++;
             }
             char[] binSym = Integer.toBinaryString(symbol).toCharArray();
-//            System.out.println(binSym);
             for(int i=0; i<8-binSym.length; i++) {
                 code[idx] = '0';
                 idx++;
@@ -147,7 +130,6 @@ public class HuffTree {
 
             sumLen += code.length;
             sumOcc++;
-            System.out.println("found new: " + Arrays.toString(code) + ", symbol: " + symbol);
             return String.valueOf(code);
         }
         else {
@@ -164,7 +146,6 @@ public class HuffTree {
 
             sumLen += code.length;
             sumOcc++;
-            System.out.println("found again: " + Arrays.toString(code) + ", symbol: " + symbol);
             return String.valueOf(code);
         }
     }

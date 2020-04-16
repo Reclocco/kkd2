@@ -1,4 +1,3 @@
-import org.jetbrains.annotations.NotNull;
 
 public class Node {
     private Node[] children = {null, null};
@@ -25,16 +24,8 @@ public class Node {
         return this.getWeight() > this.getParent().getChildTwo().getWeight();
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public int getWeight() {
         return weight;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public void incNumber(){
@@ -45,25 +36,12 @@ public class Node {
         number--;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
     public void incWeight(){
         weight++;
     }
 
-    public void setParent(Node parent){
-        this.parent = parent;
-    }
-
     public Node getParent() {
         return parent;
-    }
-
-    public void setChildren(Node child1, Node child2){
-        children[0] = child1;
-        children[1] = child2;
     }
 
     public void setChildOne(Node child){
@@ -72,10 +50,6 @@ public class Node {
 
     public void setChildTwo(Node child){
         children[1] = child;
-    }
-
-    public Node[] getChildren(){
-        return children;
     }
 
     public Node getChildOne(){
@@ -102,11 +76,4 @@ public class Node {
         this.type=type;
     }
 
-//    @Override
-//    public int compareTo(@NotNull Node o) {
-//        if(this.getWeight() > (o.getWeight()))
-//            return 1;
-//        else
-//            return 0;
-//    }
 }
