@@ -16,11 +16,11 @@ public class MyEncoder {
     }
 
     private void printStats(){
-        File file1 = new File(raw);
-        File file2 = new File(encoded);
+        File raw = new File(this.raw);
+        File encoded = new File(this.encoded);
 
         System.out.println("Entropia: " + huffTree.getEntropy());
-        System.out.println("Kompresja: " + 1.0*file2.length()/file1.length());
+        System.out.println("Kompresja: " + 1.0*raw.length()/encoded.length());
         System.out.println("Srednia długość słowa kodowego: " + huffTree.getAverage());
     }
 
