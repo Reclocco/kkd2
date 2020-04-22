@@ -8,11 +8,13 @@ public class MyEncoder {
     String encoded;
     HuffTree huffTree;
 
-    public MyEncoder() throws IOException {
+    public MyEncoder(String raw, String encoded) throws IOException {
         huffTree = new HuffTree();
 
-        raw = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\deep.txt";
-        encoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\encoded.txt";
+//        raw = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\deep.txt";
+//        encoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\encoded.txt";
+        this.raw = raw;
+        this.encoded = encoded;
     }
 
     private void printStats(){
@@ -20,7 +22,7 @@ public class MyEncoder {
         File encoded = new File(this.encoded);
 
         System.out.println("Entropia: " + huffTree.getEntropy());
-        System.out.println("Kompresja: " + 1.0*raw.length()/encoded.length());
+        System.out.println("Kompresja: " + 1.0*encoded.length()/raw.length());
         System.out.println("Srednia długość słowa kodowego: " + huffTree.getAverage());
     }
 

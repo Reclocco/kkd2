@@ -4,14 +4,22 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class MyDecoder {
+    String encoded;
+    String decoded;
+
+    public MyDecoder(String encoded, String decoded) {
+       this.encoded = encoded;
+        this.decoded = decoded;
+    }
+
     public void decode() throws IOException {
         HuffTree huffTree = new HuffTree();
 
         StringBuilder codeBuilder = new StringBuilder();
 
-        String encoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\encoded.txt";
+//        String encoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\encoded.txt";
 
-        String decoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\decoded.txt";
+//        String decoded = "C:\\Users\\micha\\Desktop\\Projekty\\4sem\\kkd2\\src\\decoded.txt";
 
         byte[] fileContent = Files.readAllBytes(Paths.get(encoded));
 
